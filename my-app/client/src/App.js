@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+import Settings from './views/settings';
+//import Dashboard from './views/dashboard'
+
 
 class App extends Component {
   state = {
@@ -17,7 +20,7 @@ class App extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch('/api/hello');
+    const response = await fetch('/api/hej');
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -30,13 +33,12 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a href={this.state.link}>{this.state.login}</a> 
+        <div className="links">
+          {/* <li><Link to="/Settings">Settings</Link></li>     */}
+        </div>
+        <a href={this.state.link}>{this.state.login}</a>          
+        <Route path="/Settings" render={()=><Settings />}/>  
       </div>
     );
   }
